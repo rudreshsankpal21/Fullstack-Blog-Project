@@ -9,15 +9,3 @@ app.get("/", (req, res) => {
 });
 
 //Connect DB
-mongoose
-  .connect(process.env.MONGOOSE_URL)
-  .then(() => {
-    app.listen(port, () => {
-      console.log("DB connected Successfully");
-
-      console.log(`http://localhost:${port}`);
-    });
-  })
-  .catch(() => {
-    console.log("DB connection failed");
-  });
