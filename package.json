@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "server.js",
   "scripts": {
-    "test": "npm run start"
+    "start":"node server.js"
   },
   "repository": {
     "type": "git",
