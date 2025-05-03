@@ -4,7 +4,11 @@
   "description": "fullstack blog application",
   "main": "server.js",
   "scripts": {
+<<<<<<< HEAD
     "start": "node server.js"
+=======
+    "start":"node server.js"
+>>>>>>> bf08e7ffd4e885b27047330d1a7972bde578382e
   },
   "repository": {
     "type": "git",
