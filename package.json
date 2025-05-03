@@ -4,7 +4,7 @@
   "description": "fullstack blog application",
   "main": "server.js",
   "scripts": {
-"start": "node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,7 +17,7 @@
     "url": "https://github.com/your-username/your-repo-name/issues"
   },
   "homepage": "https://github.com/your-username/your-repo-name#readme",
-  "description": "",
+  "description": "fullstack blog application",
   "dependencies": {
     "dotenv": "^16.5.0",
     "express": "^5.1.0"
