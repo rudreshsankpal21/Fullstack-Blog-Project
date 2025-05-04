@@ -7,7 +7,7 @@ loginRoute
     res.render("login");
   })
   .post((req, res) => {
-    res.send("POST login Route");
+    // Implemanting login logic
   });
 
 module.exports = loginRoute;
