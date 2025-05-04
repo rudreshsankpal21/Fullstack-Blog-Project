@@ -14,6 +14,7 @@ registerRoute
       const user = await User.findOne({ email });
       if (user) {
         res.send("User already exists");
+        console.log(user);
       } else {
         // Create new user
         const newUser = new User({
@@ -21,8 +22,14 @@ registerRoute
           email,
           password,
         });
+        // Save user
+        await newUser.save();
+        console.log(newUser);
+        res.redirect("/auth/login");
       }
-    } catch (error) {}
+    } catch (error) {
+      res.status(500).send(error, "Something went wrong");
+    }
   });
 
 module.exports = registerRoute;
