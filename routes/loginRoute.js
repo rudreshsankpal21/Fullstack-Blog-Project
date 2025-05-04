@@ -10,6 +10,7 @@ loginRoute
   .post((req, res) => {
     // logic for login
     const { email, password } = req.body;
+
     try {
       const userEmail = User.findOne({ email });
       const isMatch = User.findOne({ password });

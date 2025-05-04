@@ -9,6 +9,7 @@ registerRoute
   .post(async (req, res) => {
     // Main logic for user Registration
     const { username, email, password } = req.body;
+
     try {
       // Check if user exists
       const user = await User.findOne({ username });
