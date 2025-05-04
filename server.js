@@ -1,8 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const loginRoute = require("./routes/loginRoute");
-const registerRoute = require("./routes/registerRoute");
+const userRoutes = require("./routes/authRoutes");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -12,18 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 // EJS
 app.set("view engine", "ejs");
 
-//Home Route
-app.get("/", (req, res) => {
-  res.send("New Blog Project Starting");
-});
-
-//Login Route
-app.get("/auth/login", loginRoute);
-app.post("/auth/login", loginRoute);
-
-//Register Route
-app.get("/auth/register", registerRoute);
-app.post("/auth/register", registerRoute);
+//Routes
+app.use("/auth", userRoutes);
 
 //Connect DB
 mongoose
