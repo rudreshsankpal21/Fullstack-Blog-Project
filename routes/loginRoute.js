@@ -11,9 +11,9 @@ loginRoute
     // logic for login
     const { email, password } = req.body;
     try {
-      const user = User.findOne({ email });
+      const userEmail = User.findOne({ email });
       const isMatch = User.findOne({ password });
-      if (user && isMatch) {
+      if (userEmail && isMatch) {
         res.send("User Login successfull");
       } else {
         res.send("User Login Failed");
