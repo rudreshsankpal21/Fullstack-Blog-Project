@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const loginRoute = require("./routes/loginRoute");
+const registerRoute = require("./routes/registerRoute");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,6 +18,10 @@ app.get("/", (req, res) => {
 //Login Route
 app.get("/auth/login", loginRoute);
 app.post("/login", loginRoute);
+
+//Register Route
+app.get("/auth/register", registerRoute);
+app.post("/register", registerRoute);
 
 //Connect DB
 mongoose

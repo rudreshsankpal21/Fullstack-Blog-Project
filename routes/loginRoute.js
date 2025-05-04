@@ -4,7 +4,7 @@ const loginRoute = express.Router();
 loginRoute
   .route("/auth/login")
   .get((req, res) => {
-    res.json({ message: "Login" });
+    res.render("login");
   })
   .post((req, res) => {
     res.send("POST login Route");
