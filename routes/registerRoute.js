@@ -24,7 +24,6 @@ registerRoute
         });
         // Save user
         await newUser.save();
-        console.log(newUser);
         res.redirect("/auth/login");
       }
     } catch (error) {

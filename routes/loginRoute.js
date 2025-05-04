@@ -19,7 +19,7 @@ loginRoute
         res.send("User Login Failed");
       }
     } catch (error) {
-      res.send(error);
+      res.status(500).send("Error:", error);
     }
   });
 
