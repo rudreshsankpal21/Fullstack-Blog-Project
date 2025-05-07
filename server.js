@@ -12,10 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
 //Routes
-// Home Route
-app.get("/", (req, res) => {
-  res.render("home");
-});
+
 app.use("/auth", userRoutes);
 
 //Connect DB
