@@ -1,3 +1,6 @@
+const User = require("../models/User");
+const bcrypt = require("bcryptjs");
+
 //Render Register page
 exports.getRegister = (req, res) => {
   res.render("register");
@@ -9,24 +12,29 @@ exports.register = async (req, res) => {
   const { username, email, password } = req.body;
 
   try {
-    // Check if user exists
-    const user = await User.findOne({ username });
-    if (user) {
-      res.send("User already exists");
-      console.log(user);
-    } else {
-      // Create new user
-      const newUser = new User({
-        username,
-        email,
-        password,
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.render("register", {
+        title: "Register",
+        user: req.username,
+        error: "User already exists",
       });
-      // Save user
-      await newUser.save();
-      res.redirect("/auth/login");
     }
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+    // Save user
+    const user = await User.create({
+      username,
+      email,
+      password: hashedPassword,
+    });
+    res.redirect("/auth/login");
   } catch (error) {
-    res.status(500).send(error, "Something went wrong");
+    res.render("register", {
+      title: "Register",
+      user: req.username,
+      error: error.message,
+    });
   }
 };
 
