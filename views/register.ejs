@@ -7,8 +7,8 @@
   </head>
   <body>
     <h1>Register</h1>
-    <% if (error) { %>
-    <div style="color: red"><%=error%></div>
+    <% if (typeof errorMessage !== 'undefined' && errorMessage) { %>
+    <div style="color: red"><%=errorMessage%></div>
     <% } %>
     <form action="/auth/register" method="post">
       <input type="text" name="username" placeholder="Username" required />

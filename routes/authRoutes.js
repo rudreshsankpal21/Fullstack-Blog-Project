@@ -4,6 +4,7 @@ const {
   getRegister,
   register,
   login,
+  home,
 } = require("../controllers/authController");
 const userRoutes = express.Router();
 

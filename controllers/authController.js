@@ -17,7 +17,7 @@ exports.register = async (req, res) => {
       return res.render("register", {
         title: "Register",
         user: req.username,
-        error: "User already exists",
+        errorMessage: "User already exists",
       });
     }
     // Hash password
@@ -33,7 +33,7 @@ exports.register = async (req, res) => {
     res.render("register", {
       title: "Register",
       user: req.username,
-      error: error.message,
+      errorMessage: error,
     });
   }
 };
