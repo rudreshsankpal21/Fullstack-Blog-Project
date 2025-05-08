@@ -4,7 +4,11 @@ const passport = require("passport");
 
 //Render Register page
 exports.getRegister = (req, res) => {
-  res.render("register");
+  res.render("register", {
+    title: "Register",
+    user: req.username,
+    error: "",
+  });
 };
 
 // Register logic
