@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 
 module.exports = function (passport) {
   // Define the local strategy for email and password authentication
-  passport.User(
+  passport.use(
     new localStrategy(
       { usernameField: "email" },
       async (email, password, done) => {
@@ -33,13 +33,13 @@ module.exports = function (passport) {
   );
 
   // serializedUser:Determines which data of the user object should be stored in the session. Here,we store the user ID
-  passport.serializedUser(function (user, done) {
+  passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
 
   //   Deserialize the user object based on the use ID stored in the session
   try {
-    passport.deserializedUser(async function (id, done) {
+    passport.deserializeUser(async function (id, done) {
       const user = await User.findById(id);
       done(null, user);
     });

@@ -1,5 +1,6 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const passport = require("passport");
 
 //Render Register page
 exports.getRegister = (req, res) => {
@@ -44,19 +45,11 @@ exports.getLogin = (req, res) => {
 };
 
 // Login logic
-exports.login = async (req, res) => {
+exports.login = async (req, res, next) => {
   // logic for login
-  const { email, password } = req.body;
-
-  try {
-    const userEmail = await User.findOne({ email });
-    const isMatch = await User.findOne({ password });
-    if (userEmail && isMatch) {
-      res.send("User Login successfull");
-    } else {
-      res.send("User Login Failed");
+  passport.authenticate("local", (err, user, info) => {
+    if (err) {
+      return next(err);
     }
-  } catch (error) {
-    res.status(500).send("Error:", error);
-  }
+  })(req, res, next);
 };
