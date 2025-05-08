@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
 
 // Render Login Page
 exports.getLogin = (req, res) => {
-  res.render("login");
+  res.render("login", { title: "Login", error: "" });
 };
 
 // Login logic

@@ -33,7 +33,7 @@ app.set("view engine", "ejs");
 //Routes
 // Home Route
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render("home", { title: "Home", error: "" });
 });
 app.use("/auth", userRoutes);
 
