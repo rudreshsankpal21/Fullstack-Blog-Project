@@ -6,7 +6,7 @@ const passport = require("passport");
 exports.getRegister = (req, res) => {
   res.render("register", {
     title: "Register",
-    user: req.username,
+    user: req.user,
     error: "",
   });
 };
@@ -21,7 +21,7 @@ exports.register = async (req, res) => {
     if (existingUser) {
       return res.render("register", {
         title: "Register",
-        user: req.username,
+        user: req.user,
         errorMessage: "User already exists",
       });
     }
@@ -37,7 +37,7 @@ exports.register = async (req, res) => {
   } catch (error) {
     res.render("register", {
       title: "Register",
-      user: req.username,
+      user: req.user,
       errorMessage: error,
     });
   }
@@ -45,7 +45,7 @@ exports.register = async (req, res) => {
 
 // Render Login Page
 exports.getLogin = (req, res) => {
-  res.render("login", { title: "Login", error: "" });
+  res.render("login", { title: "Login", error: "", user: req.user });
 };
 
 // Login logic
@@ -58,7 +58,7 @@ exports.login = async (req, res, next) => {
     if (!user) {
       return res.render("login", {
         title: "Login",
-        user: req.username,
+        user: req.user,
         error: info.message,
       });
     }

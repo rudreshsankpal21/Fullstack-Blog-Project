@@ -9,9 +9,17 @@
     <h1>Header</h1>
     <nav>
       <ul>
+        <%if(user){%>
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Posts</a></li>
+        <li><a href="/auth/register">profile</a></li>
+        <li><a href="/auth/login">Logout</a></li>
+        <%}else{%>
         <li><a href="/">Home</a></li>
         <li><a href="/auth/register">Register</a></li>
         <li><a href="/auth/login">Login</a></li>
+        <li><a href="/">Posts</a></li>
+        <%}%>
       </ul>
     </nav>
   </body>
