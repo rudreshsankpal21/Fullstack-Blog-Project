@@ -51,5 +51,18 @@ exports.login = async (req, res, next) => {
     if (err) {
       return next(err);
     }
+    if (!user) {
+      return res.render("login", {
+        title: "Login",
+        user: req.username,
+        error: info.message,
+      });
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      return res.redirect("/");
+    });
   })(req, res, next);
 };
