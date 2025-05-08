@@ -35,6 +35,7 @@ app.set("view engine", "ejs");
 app.get("/", (req, res) => {
   res.render("home", { title: "Home", error: "", user: req.user });
 });
+
 app.use("/auth", userRoutes);
 
 //Connect DB

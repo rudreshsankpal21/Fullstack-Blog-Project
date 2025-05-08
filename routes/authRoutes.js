@@ -4,7 +4,8 @@ const {
   getRegister,
   register,
   login,
-  home,
+
+  logout,
 } = require("../controllers/authController");
 const userRoutes = express.Router();
 
@@ -20,4 +21,6 @@ userRoutes.get("/register", getRegister);
 //Logic for user Registration
 userRoutes.post("/register", register);
 
+//Logout Route
+userRoutes.get("/logout", logout);
 module.exports = userRoutes;
