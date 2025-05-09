@@ -3,9 +3,9 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 const cloudinary = require("./cloudinary");
 
 const storage = new CloudinaryStorage({
-  cloudinary,
+  cloudinary: cloudinary,
   params: {
-    folder: "fullstack-blog-project",
+    folder: "fullstack-blog",
     allowedFormats: ["jpg", "png", "jpeg"],
   },
 });
