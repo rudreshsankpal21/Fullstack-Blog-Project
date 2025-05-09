@@ -11,7 +11,7 @@ exports.getPostForm = (req, res) => {
 // Creating new post
 exports.createPost = async (req, res) => {
   const { title, content } = req.body;
-  console.log(req.file);
+  console.log(req.file, "File uploaded");
 
   const newPost = await Post.create({
     title,
