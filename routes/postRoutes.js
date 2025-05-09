@@ -6,5 +6,6 @@ const postRoutes = express.Router();
 postRoutes.get("/add", getPostForm);
 
 //Creating new post route
-postRoutes.post("/posts", createPost);
+postRoutes.post("/add", createPost);
+
 module.exports = postRoutes;

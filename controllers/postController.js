@@ -16,5 +16,6 @@ exports.createPost = async (req, res) => {
     content,
     author: req.user._id,
   });
+  console.log(newPost);
   res.redirect("/posts");
 };
