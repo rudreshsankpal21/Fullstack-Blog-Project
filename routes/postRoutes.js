@@ -7,6 +7,6 @@ const postRoutes = express.Router();
 postRoutes.get("/add", getPostForm);
 
 //Creating new post route
-postRoutes.post("/add", upload.array("image", 10), createPost);
+postRoutes.post("/add", upload.array("images", 10), createPost);
 
 module.exports = postRoutes;
