@@ -11,13 +11,4 @@ exports.getPostForm = (req, res) => {
 // Creating new post
 exports.createPost = async (req, res) => {
   const { title, content } = req.body;
-  console.log(req.file, "File uploaded");
-
-  const newPost = await Post.create({
-    title,
-    content,
-    author: req.user._id,
-  });
-  console.log(newPost);
-  res.redirect("/posts");
 };
