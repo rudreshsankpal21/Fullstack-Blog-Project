@@ -6,6 +6,7 @@ const passport = require("passport");
 const passportConfig = require("./config/passport");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
+const postRoutes = require("./routes/postRoutes");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -40,7 +41,11 @@ app.get("/", (req, res) => {
   });
 });
 
+// User Routes
 app.use("/auth", userRoutes);
+
+// Post routes
+app.use("/posts", postRoutes);
 
 //Connect DB
 mongoose
