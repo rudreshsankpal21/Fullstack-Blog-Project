@@ -20,10 +20,24 @@ exports.createPost = async (req, res) => {
       error: "Atleast one Image is Mandatory",
     });
   }
+
+  // Save the files into DB
   const images = await Promise.all(
     req.files.map(async (file) => {
       // Save the images into the DB
-      const newFile = new Files({});
+      const newFile = new Files({
+        url: file.path,
+        public_id: file.filename,
+        uploaded_by: req.user._id,
+      });
+      await newFile.save();
+
+      return {
+        url: newFile.url,
+        public_id: newFile.public_id,
+      };
     })
   );
+
+  // Create the post
 };
