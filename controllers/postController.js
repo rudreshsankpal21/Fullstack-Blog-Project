@@ -31,9 +31,10 @@ exports.createPost = async (req, res) => {
       const newFile = new Files({
         url: file.path,
         public_id: file.filename,
-        uploaded_by: req.user._id,
+        // uploaded_by: req.user._id,
       });
       await newFile.save();
+      console.log(newFile);
 
       return {
         url: newFile.url,
@@ -46,7 +47,7 @@ exports.createPost = async (req, res) => {
   const newPost = new Post({
     title,
     content,
-    author: req.user._id,
+    // author: req.user._id,
     images,
   });
 
@@ -55,7 +56,7 @@ exports.createPost = async (req, res) => {
   res.render("newPost", {
     title: "Create Post",
     user: req.user,
-    error: "Something got wrong",
+    error: "",
     success: "Post created successfully",
   });
 };
