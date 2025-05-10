@@ -45,7 +45,7 @@ exports.createPost = async (req, res) => {
   const newPost = new Post({
     title,
     content,
-    author: req.use._id,
+    author: req.user._id,
     images,
   });
 
@@ -54,6 +54,7 @@ exports.createPost = async (req, res) => {
   res.render("newPost", {
     title: "Create Post",
     user: req.user,
+    error: "Something got wrong",
     success: "Post created successfully",
   });
 };
