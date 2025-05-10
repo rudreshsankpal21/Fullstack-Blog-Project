@@ -1,4 +1,0 @@
-TO-DOs
-- create post route/page
-- add posts to the post route
-- add a particular post to its owner
