@@ -1,4 +1,7 @@
 <form action="/posts/add" method="post" enctype="multipart/form-data">
+  <%if(success){ %>
+  <p><%=success%></p>
+  <%}%>
   <div>
     <label for="title">Title</label>
     <input type="text" name="title" id="title" placeholder="Title" />

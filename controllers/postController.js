@@ -6,6 +6,8 @@ exports.getPostForm = (req, res) => {
   res.render("newPost", {
     title: "Create Post",
     user: req.user,
+    error: "",
+    success: "",
   });
 };
 
@@ -40,4 +42,18 @@ exports.createPost = async (req, res) => {
   );
 
   // Create the post
+  const newPost = new Post({
+    title,
+    content,
+    author: req.use._id,
+    images,
+  });
+
+  await newPost.save();
+
+  res.render("newPost", {
+    title: "Create Post",
+    user: req.user,
+    success: "Post created successfully",
+  });
 };
