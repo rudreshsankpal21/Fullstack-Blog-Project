@@ -32,7 +32,7 @@ module.exports = function (passport) {
     )
   );
 
-  // serializedUser:Determines which data of the user object should be stored in the session. Here,we store the user ID
+  // serializedUser:Determines which data of the user object should be stored in the session. (Here,we store the user ID)
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
