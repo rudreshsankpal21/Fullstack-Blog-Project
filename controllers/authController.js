@@ -1,55 +1,55 @@
 const User = require("../models/User");
 const bcrypt = require("bcryptjs");
+const asyncHandler = require("express-async-handler");
+
 const passport = require("passport");
 
 //Render Register page
-exports.getRegister = (req, res) => {
+exports.getRegister = asyncHandler((req, res) => {
   res.render("register", {
     title: "Register",
     user: req.user,
     error: "",
   });
-};
+});
 
 // Register logic
-exports.register = async (req, res) => {
+exports.register = asyncHandler(async (req, res) => {
   // Main logic for user Registration
   const { username, email, password } = req.body;
 
-  try {
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.render("register", {
-        title: "Register",
-        user: req.user,
-        errorMessage: "User already exists",
-      });
-    }
-    // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
-    // Save user
-    const user = await User.create({
-      username,
-      email,
-      password: hashedPassword,
-    });
-    res.redirect("/auth/login");
-  } catch (error) {
-    res.render("register", {
+  const existingUser = await User.findOne({ email });
+  if (existingUser) {
+    return res.render("register", {
       title: "Register",
       user: req.user,
-      errorMessage: error,
+      errorMessage: "User already exists",
     });
   }
-};
+  // Hash password
+  const hashedPassword = await bcrypt.hash(password, 10);
+  // Save user
+  const user = await User.create({
+    username,
+    email,
+    password: hashedPassword,
+  });
+  res.redirect("/auth/login");
+
+  res.render("register", {
+    title: "Register",
+    user: req.user,
+    errorMessage: error,
+  });
+});
 
 // Render Login Page
-exports.getLogin = (req, res) => {
+exports.getLogin = asyncHandler((req, res) => {
   res.render("login", { title: "Login", error: "", user: req.user });
-};
+});
 
 // Login logic
-exports.login = async (req, res, next) => {
+exports.login = asyncHandler(async (req, res, next) => {
   // logic for login
   passport.authenticate("local", (err, user, info) => {
     if (err) {
@@ -69,13 +69,13 @@ exports.login = async (req, res, next) => {
       return res.redirect("/");
     });
   })(req, res, next);
-};
+});
 
-exports.logout = (req, res, next) => {
+exports.logout = asyncHandler((req, res, next) => {
   req.logout((err) => {
     if (err) {
       return next(err);
     }
     res.redirect("/auth/login");
   });
-};
+});
