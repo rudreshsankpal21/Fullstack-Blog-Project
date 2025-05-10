@@ -18,8 +18,9 @@ exports.createPost = async (req, res) => {
   if (!req.files || req.files.length === 0) {
     return res.render("newPost", {
       title: "Create Post",
-      use: req.user,
+      user: req.user,
       error: "Atleast one Image is Mandatory",
+      success: "",
     });
   }
 
