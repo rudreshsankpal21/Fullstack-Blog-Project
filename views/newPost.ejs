@@ -47,30 +47,5 @@
       </form>
     </div>
   </div>
-  <script>
-    function previewImages() {
-      const preview = document.getElementById("image-preview");
-      preview.innerHTML = "";
-      const files = document.getElementById("images").files;
-      for (let i = 0; i < files.length; i++) {
-        const img = document.createElement("img");
-        img.src = URL.createObjectURL(files[i]);
-        img.classList.add("img-thumbnail", "mr-2", "mb-2");
-        img.style.maxWidth = "150px";
-        preview.appendChild(img);
-      }
-    }
-
-    //form validation
-    function validationForm() {
-      const title = document.getElementById("title").value;
-      const content = document.getElementById("content").value;
-      if (!title || !content) {
-        alert("Please fill in all fields");
-        return false;
-      }
-      return true;
-    }
-  </script>
   <%- include('partials/footer') %>
 </div>
