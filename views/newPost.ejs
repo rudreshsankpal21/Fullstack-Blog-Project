@@ -15,12 +15,7 @@
       <% } %> <% if (success) { %>
       <div class="alert alert-success" role="alert"><%= success %></div>
       <% } %>
-      <form
-        action="/posts/add"
-        method="POST"
-        enctype="multipart/form-data"
-        onsubmit=" return validationForm()"
-      >
+      <form action="/posts/add" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input type="text" class="form-control" name="title" id="title" />
@@ -66,17 +61,6 @@
 
         preview.appendChild(img);
       }
-    }
-
-    // Form validation
-    function validationForm() {
-      const title = document.getElementById("title").value;
-      const content = document.getElementById("content").value;
-      if (!title || !content) {
-        alert("All fields are mandatory");
-        return false;
-      }
-      return true;
     }
   </script>
 
