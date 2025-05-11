@@ -51,6 +51,7 @@ exports.createPost = asyncHandler(async (req, res) => {
     author: req.user._id,
     images,
   });
+  console.log("req.user:", req.user);
 
   await newPost.save();
 
@@ -64,10 +65,11 @@ exports.createPost = asyncHandler(async (req, res) => {
 
 // Get all posts
 exports.getPosts = asyncHandler(async (req, res) => {
-  const post = await Post.find().populate("author", "username");
+  const posts = await Post.find().populate("author", "username");
+
   res.render("posts", {
     title: "Posts",
-    post,
+    posts,
     user: req.user,
     success: "",
     error: "",

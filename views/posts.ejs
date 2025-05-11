@@ -1,14 +1,31 @@
 <%- include('partials/header', { title, user: user }) %>
-<h1>Posts</h1>
-<% if (post?.length > 0) { %> <% post.forEach(post => { %>
-<div>
-  <h2><%- post.title %></h2>
-  <% if (post?.images.length) { %>
-  <img src="<%-post.images[0].url%>" height="400" width="700" />
-  <% } %>
-  <p><%- post.content %></p>
-</div>
-<% }) %> <% } else { %>
-<h2>No posts found</h2>
 
-<% } %> <%-include('partials/footer') %>
+<h1 class="text-center my-4">All Posts [ <%= posts.length %> ]</h1>
+<div class="row vh-100">
+  <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+  <div class="col-md-4 mb-4">
+    <div class="card">
+      <% if (post.images && post.images.length > 0) { %>
+      <img
+        src="<%= post.images[0].url %>"
+        class="card-img-top"
+        alt="Post Image"
+      />
+      <% } %>
+      <div class="card-body">
+        <h3 class="card-title"><%= post.title %></h3>
+        <h4 class="card-text">
+          by <%= post.author && post.author.username ? post.author.username :
+          "Unknown" %> on <%= post.createdAt.toDateString() %>
+        </h4>
+
+        <a href="/posts/<%= post._id %>" class="btn btn-primary">Read More</a>
+      </div>
+    </div>
+  </div>
+  <% }) %> <% } else { %>
+  <p class="text-center w-100">No posts available.</p>
+  <% } %>
+</div>
+
+<%- include('partials/footer') %>
