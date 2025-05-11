@@ -76,10 +76,12 @@ exports.getPosts = asyncHandler(async (req, res) => {
 
 // Get post by id
 exports.getPostById = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id)
-    .populate("author", "username")
-    .populate("comments");
-  res.render("post", {
+  const post = await Post.findById(req.params.id).populate(
+    "author",
+    "username"
+  );
+  // .populate("comments");
+  res.render("postDets", {
     title: "Post",
     post,
     user: req.user,
