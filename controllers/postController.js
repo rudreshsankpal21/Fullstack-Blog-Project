@@ -35,7 +35,6 @@ exports.createPost = asyncHandler(async (req, res) => {
         uploaded_by: req.user._id,
       });
       await newFile.save();
-      console.log(newFile);
 
       return {
         url: newFile.url,
@@ -51,7 +50,6 @@ exports.createPost = asyncHandler(async (req, res) => {
     author: req.user._id,
     images,
   });
-  console.log("req.user:", req.user);
 
   await newPost.save();
 
