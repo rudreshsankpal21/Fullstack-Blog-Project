@@ -1,3 +1,9 @@
 <%- include('partials/header', { title: 'Home', user: user })%>
-<h1>Post details</h1>
-<%-include('partials/footer') %>
+<h1><%=post?.title%></h1>
+<h1><%=post?.content%></h1>
+<!-- displaying Images -->
+<% post?.images.forEach((image)=>{ %>
+<div>
+  <img src="<%=image.url%>" alt="<%=post?.title%>" height="350" width="600" />
+</div>
+<%}) %> <%-include('partials/footer') %>
