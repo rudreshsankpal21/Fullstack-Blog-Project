@@ -39,6 +39,7 @@ exports.addComment = asyncHandler(async (req, res) => {
   //   Push comment to the post
   post.comments.push(comment._id);
   await post.save();
+
   //   redirect to the post
-  res.redirect(`/post/${postId}`);
+  res.redirect(`/posts/${postId}`);
 });
