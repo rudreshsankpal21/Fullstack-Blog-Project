@@ -3,6 +3,12 @@
 <% if (post?.length > 0) { %> <% post.forEach(post => { %>
 <div>
   <h2><%- post.title %></h2>
+  <% if (post?.images.length) { %>
+  <img src="<%-post.images[0].url%>" height="400" width="700" />
+  <% } %>
   <p><%- post.content %></p>
 </div>
-<% }) %> <% } %> <%-include('partials/footer') %>
+<% }) %> <% } else { %>
+<h2>No posts found</h2>
+
+<% } %> <%-include('partials/footer') %>
