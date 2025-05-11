@@ -1,0 +1,37 @@
+const asyncHandler = require("express-async-handler");
+const Post = require("../models/Post");
+const Comment = require("../models/Comment");
+// Add commments
+exports.addComment = asyncHandler(async (req, res) => {
+  const { content } = req.body;
+  const postId = req.params.id;
+
+  //   Find post
+  const post = await Post.findById(postId);
+  //   Validation
+  if (!post) {
+    return res.render("postDets", {
+      title: "Post",
+      post,
+      user: req.user,
+      error: "Post not found",
+      success: "",
+    });
+  }
+  if (!content) {
+    return res.render("postDets", {
+      title: "Post",
+      post,
+      user: req.user,
+      error: "Empty comment cannot be sent",
+      success: "",
+    });
+  }
+
+  //   Save comment
+  const comment = new Comment({
+    content,
+    post: postId,
+    author: req.user._id,
+  });
+});
