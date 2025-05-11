@@ -67,7 +67,7 @@ exports.getPosts = asyncHandler(async (req, res) => {
   const post = await Post.find().populate("author", "username");
   res.render("posts", {
     title: "Posts",
-    posts,
+    post,
     user: req.user,
     success: "",
     error: "",
