@@ -22,6 +22,7 @@
           </div>
 
           <% if (user && user._id.toString() === post.author._id.toString()) {%>
+
           <!-- Only show to the author -->
           <a href="/posts/<%= post._id %>/edit" class="btn btn-primary">
             <i class="fas fa-edit"></i> Edit Post
@@ -35,6 +36,7 @@
               <i class="fas fa-trash-alt"></i> Delete Post
             </button>
           </form>
+
           <% } %>
         </div>
       </div>
