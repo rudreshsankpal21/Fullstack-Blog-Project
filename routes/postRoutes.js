@@ -6,6 +6,7 @@ const {
   getPostById,
   getEditPostForm,
   updatePost,
+  deletePost,
 } = require("../controllers/postController");
 const upload = require("../config/multer");
 const { ensureAuthenticated } = require("../middlewares/auth");
@@ -38,5 +39,8 @@ postRoutes.put(
   upload.array("images", 8),
   updatePost
 );
+
+// Delete post
+postRoutes.delete("/:id", ensureAuthenticated, deletePost);
 
 module.exports = postRoutes;
