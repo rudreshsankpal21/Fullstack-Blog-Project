@@ -50,7 +50,7 @@ exports.getCommentForm = asyncHandler(async (req, res) => {
 
   if (!comment) {
     return res.render("postDets", {
-      title: "Comment",
+      title: "Post",
       comment,
       user: req.user,
       error: "comment not found",
@@ -65,4 +65,34 @@ exports.getCommentForm = asyncHandler(async (req, res) => {
     error: "",
     success: "",
   });
+});
+
+// update comment
+exports.updateComment = asyncHandler(async (req, res) => {
+  const { content } = req.body;
+  const comment = await Comment.findById(req.params.id);
+
+  if (!comment) {
+    return res.render("postDets", {
+      title: "Post",
+      comment,
+      user: req.user,
+      error: "Comment not found",
+      success: "",
+    });
+  }
+
+  if (comment.author.toString() !== req.user._id.toString()) {
+    return res.render("postDets", {
+      title: "Post",
+      comment,
+      user: req.user,
+      success: "",
+      error: "You are not authorized to edit this comment",
+    });
+  }
+
+  comment.content = content || comment.content;
+  await comment.save();
+  res.redirect(`/posts${comment.post}`);
 });
