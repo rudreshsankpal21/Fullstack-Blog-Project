@@ -1,7 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
 const Post = require("../models/Post");
-const Files = require("../models/File");
 
 // get user profile
 exports.getUserProfile = asyncHandler(async (req, res) => {
