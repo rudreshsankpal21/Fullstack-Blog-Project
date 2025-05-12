@@ -7,20 +7,20 @@ const {
 
   logout,
 } = require("../controllers/authController");
-const userRoutes = express.Router();
+const authRoutes = express.Router();
 
 // Render Login page
-userRoutes.get("/login", getLogin);
+authRoutes.get("/login", getLogin);
 
 // Logic for user login
-userRoutes.post("/login", login);
+authRoutes.post("/login", login);
 
 // Render register page
-userRoutes.get("/register", getRegister);
+authRoutes.get("/register", getRegister);
 
 //Logic for user Registration
-userRoutes.post("/register", register);
+authRoutes.post("/register", register);
 
 //Logout Route
-userRoutes.get("/logout", logout);
-module.exports = userRoutes;
+authRoutes.get("/logout", logout);
+module.exports = authRoutes;
