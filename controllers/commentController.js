@@ -99,7 +99,7 @@ exports.updateComment = asyncHandler(async (req, res) => {
 
 // Delete comment
 exports.deleteComment = asyncHandler(async (req, res) => {
-  const comment = Comment.findById(req.params.id);
+  const comment = await Comment.findById(req.params.id);
   if (!comment) {
     return res.render("postDets", {
       title: "Posts",
