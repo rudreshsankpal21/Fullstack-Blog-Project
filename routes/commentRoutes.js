@@ -15,4 +15,5 @@ commentRoutes.get("/comments/:id/edit", getCommentForm);
 
 // update comment
 commentRoutes.put("/comments/:id", ensureAuthenticated, updateComment);
+
 module.exports = commentRoutes;
