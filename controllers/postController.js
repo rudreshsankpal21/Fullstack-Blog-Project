@@ -146,14 +146,9 @@ exports.updatePost = asyncHandler(async (req, res) => {
   }
 
   // show what to edit
-  post.title = title;
-  post.content = content;
-  await post.save();
-  res.render("postDets", {
-    title: "Post",
-    post,
-    user: req.user,
-    error: "",
-    success: "Post updated successfully",
-  });
+  post.title = title || post.title;
+  post.content = content || post.content;
+  if (req.files) {
+    await Promise.all(post.images.map(async (image) => {}));
+  }
 });
