@@ -1,7 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Files = require("../models/File");
 const Post = require("../models/Post");
-
+const cloudinary = require("../config/cloudinary");
 // Rendering post form
 exports.getPostForm = asyncHandler((req, res) => {
   res.render("newPost", {
