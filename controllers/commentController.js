@@ -43,3 +43,26 @@ exports.addComment = asyncHandler(async (req, res) => {
   //   redirect to the post
   res.redirect(`/posts/${postId}`);
 });
+
+// get comment form
+exports.getCommentForm = asyncHandler(async (req, res) => {
+  const comment = await Comment.findById(req.params.id);
+
+  if (!comment) {
+    return res.render("postDets", {
+      title: "Comment",
+      comment,
+      user: req.user,
+      error: "comment not found",
+      success: "",
+    });
+  }
+
+  res.render("editComment", {
+    title: "Comment",
+    comment,
+    user: req.user,
+    error: "",
+    success: "",
+  });
+});
