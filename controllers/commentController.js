@@ -96,3 +96,30 @@ exports.updateComment = asyncHandler(async (req, res) => {
   await comment.save();
   res.redirect(`/posts/${comment.post}`);
 });
+
+// Delete comment
+exports.deleteComment = asyncHandler(async (req, res) => {
+  const comment = Comment.findById(req.params.id);
+  if (!comment) {
+    return res.render("postDets", {
+      title: "Posts",
+      user: req.user,
+      comment,
+      error: "Comment not found",
+      success: "",
+    });
+  }
+
+  if (comment.author.toString() !== req.user._id.toString()) {
+    res.render("postDets", {
+      title: "Posts",
+      comment,
+      user: req.user,
+      success: "",
+      error: "You are not authorized to delete this comment",
+    });
+  }
+
+  await Comment.findByIdAndDelete(req.params.id);
+  res.redirect(`/posts/${comment.post}`);
+});
