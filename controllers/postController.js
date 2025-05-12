@@ -117,3 +117,20 @@ exports.getEditPostForm = asyncHandler(async (req, res) => {
     success: "",
   });
 });
+
+// update Post
+exports.updatePost = asyncHandler(async (req, res) => {
+  const { title, content } = req.body;
+
+  // Find the post by id
+  const post = await Post.findById(req.params.id);
+  if (!post) {
+    return res.render("postDetails", {
+      title: "Post",
+      post,
+      user: req.user,
+      error: "Post not found",
+      success: "",
+    });
+  }
+});
