@@ -94,5 +94,5 @@ exports.updateComment = asyncHandler(async (req, res) => {
 
   comment.content = content || comment.content;
   await comment.save();
-  res.redirect(`/posts${comment.post}`);
+  res.redirect(`/posts/${comment.post}`);
 });
