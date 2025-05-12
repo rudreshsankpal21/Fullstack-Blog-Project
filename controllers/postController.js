@@ -149,6 +149,28 @@ exports.updatePost = asyncHandler(async (req, res) => {
   post.title = title || post.title;
   post.content = content || post.content;
   if (req.files) {
-    await Promise.all(post.images.map(async (image) => {}));
+    await Promise.all(
+      post.images.map(async (image) => {
+        // Remove images from cloudinary
+        await cloudinary.uploader.destroy(image.public_id);
+      })
+    );
   }
+  post.images = await Promise.all(
+    req.files.map(async (file) => {
+      const newFile = new Files({
+        url: file.path,
+        public_id: file.filename,
+        uploaded_by: req.user._id,
+      });
+      await newFile.save();
+      return {
+        url: newFile.url,
+        public_id: newFile.public_id,
+      };
+    })
+  );
+
+  await post.save();
+  res.redirect(`/posts/${post._id}`);
 });
