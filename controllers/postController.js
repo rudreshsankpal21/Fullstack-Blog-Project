@@ -189,4 +189,13 @@ exports.deletePost = asyncHandler(async (req, res) => {
       success: "",
     });
   }
+  // Deletion of post
+  await Promise.all(
+    post.images.map(async (img) => {
+      await cloudinary.uploader.destroy(img.public_id);
+    })
+  );
+
+  await Post.findByIdAndDelete(req.params.id);
+  res.redirect("/posts");
 });
