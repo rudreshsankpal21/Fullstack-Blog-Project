@@ -56,8 +56,8 @@
                 comment.content %>
               </div>
               <% if (user && user._id.toString() ===
-              comment.author._id.toString()) { %>
-              <!-- Only show to the author -->
+              comment.author._id.toString()) { %> // -- Only show to the author
+              -->
               <div class="btn-group">
                 <a
                   href="/comments/<%= comment._id %>/edit"
