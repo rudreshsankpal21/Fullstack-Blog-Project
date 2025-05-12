@@ -28,6 +28,6 @@ postRoutes.get("/", getPosts);
 postRoutes.get("/:id", getPostById);
 
 //get edit post form
-postRoutes.get("/:id", getEditPostForm);
+postRoutes.get("/:id/edit", getEditPostForm);
 
 module.exports = postRoutes;
