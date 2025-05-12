@@ -133,4 +133,27 @@ exports.updatePost = asyncHandler(async (req, res) => {
       success: "",
     });
   }
+
+  // check if the editor of post isAuthor or not
+  if (post.author.toString() !== req.user._id.toString()) {
+    return res.render("postDets", {
+      title: "Post",
+      post,
+      user: req.user,
+      error: "You are not authorized to edit this post",
+      success: "",
+    });
+  }
+
+  // show what to edit
+  post.title = title;
+  post.content = content;
+  await post.save();
+  res.render("postDets", {
+    title: "Post",
+    post,
+    user: req.user,
+    error: "",
+    success: "Post updated successfully",
+  });
 });
