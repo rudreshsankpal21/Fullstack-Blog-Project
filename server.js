@@ -9,6 +9,7 @@ const MongoStore = require("connect-mongo");
 const postRoutes = require("./routes/postRoutes");
 const errorHandler = require("./middlewares/errorHandler");
 const commentRoutes = require("./routes/commentRoutes");
+const methodOverride = require("method-override");
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -24,6 +25,9 @@ app.use(
     store: MongoStore.create({ mongoUrl: process.env.MONGOOSE_URL }),
   })
 );
+
+// Method override middleware
+app.use(methodOverride("_method"));
 
 // Passport configuration
 passportConfig(passport);
