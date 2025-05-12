@@ -174,3 +174,19 @@ exports.updatePost = asyncHandler(async (req, res) => {
   await post.save();
   res.redirect(`/posts/${post._id}`);
 });
+
+// Delete Post
+exports.deletePost = asyncHandler(async (req, res) => {
+  // Find the post
+  const post = await Post.findById(req.params.id);
+
+  if (!post) {
+    res.render("postDets", {
+      title: "Post",
+      post,
+      user: req.user,
+      error: "Post not found",
+      success: "",
+    });
+  }
+});
