@@ -196,5 +196,6 @@ exports.deletePost = asyncHandler(async (req, res) => {
     })
   );
 
+  await Post.findByIdAndDelete(req.params.id);
   res.redirect("/posts");
 });
