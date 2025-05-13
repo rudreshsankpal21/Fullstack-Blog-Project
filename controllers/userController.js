@@ -98,7 +98,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
 
 // Delete profile
 exports.deleteUserProfile = asyncHandler(async (req, res) => {
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(req.user._id);
   if (!user) {
     res.render("login", {
       title: "Login",

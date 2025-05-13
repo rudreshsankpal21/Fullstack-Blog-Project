@@ -3,6 +3,7 @@ const {
   getUserProfile,
   editUserProfile,
   updateUserProfile,
+  deleteUserProfile,
 } = require("../controllers/userController");
 const { ensureAuthenticated } = require("../middlewares/auth");
 const upload = require("../config/multer");
@@ -22,4 +23,6 @@ userRoutes.post(
   updateUserProfile
 );
 
+// Delete userProfile route
+userRoutes.post("/delete", ensureAuthenticated, deleteUserProfile);
 module.exports = userRoutes;
