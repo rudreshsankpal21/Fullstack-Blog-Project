@@ -3,6 +3,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 const cloudinary = require("../config/cloudinary");
 const Files = require("../models/File");
+const Comment = require("../models/Comment");
 // get user profile
 exports.getUserProfile = asyncHandler(async (req, res) => {
   // find the user
@@ -93,4 +94,45 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
     error: "",
     success: "Profile updated successfully",
   });
+});
+
+// Delete profile
+exports.deleteUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.params.id);
+  if (!user) {
+    res.render("login", {
+      title: "Login",
+      user: req.user,
+      error: "User not found",
+      success: "",
+    });
+  }
+  // Delete user's profile picture from Cloudinary
+  if (user.profilePicture && user.profilePicture._id) {
+    await cloudinary.uploader.destroy(user.profilePicture.public_id);
+  }
+
+  // Delete all posts, images, comments created by user
+  const posts = await Post.find({ author: req.user._id });
+
+  for (const post of posts) {
+    for (const image of post.images) {
+      await cloudinary.uploader.destroy(image.public_id);
+    }
+    await Comment.deleteMany({ post: post._id });
+    await Post.findByIdAndDelete(post._id);
+  }
+
+  // delete all comments made by user
+  // await Comment.deleteMany({ author: req.user._id });
+
+  // Delete all files uploaded by the user
+  const files = await Files.find({ uploaded_by: req.user._id });
+  for (const file of files) {
+    await cloudinary.uploader.destroy(file.public_id);
+  }
+
+  // Delete user
+  await User.findByIdAndDelete(req.user._id);
+  res.redirect("/auth/register");
 });
