@@ -28,3 +28,22 @@ exports.getUserProfile = asyncHandler(async (req, res) => {
     postCount: posts.length,
   });
 });
+
+// get Edit user profile form
+exports.editUserProfile = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  if (!user) {
+    return res.render("login", {
+      title: "Login",
+      user: req.user,
+      error: "User not found",
+      success: "",
+    });
+  }
+  res.render("editProfile", {
+    title: "Edit Profile",
+    user,
+    error: "",
+    success: "",
+  });
+});
