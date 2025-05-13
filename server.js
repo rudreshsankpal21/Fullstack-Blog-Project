@@ -15,6 +15,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware for passing form data
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Session middleware
