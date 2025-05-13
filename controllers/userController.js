@@ -87,7 +87,7 @@ exports.updateUserProfile = asyncHandler(async (req, res) => {
   }
 
   await user.save();
-  res.render("editProfile", {
+  res.render("home", {
     title: "Edit Profile",
     user,
     error: "",
